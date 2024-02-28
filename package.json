@@ -1,0 +1,24 @@
+{
+  "name": "lsp-linter-cli",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-lsp-client": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.21",
+    "@vue/language-server": "^1.8.27",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3",
+    "typescript-language-server": "^4.3.3",
+    "typescript-vue-plugin": "^1.8.27",
+    "vue": "2.7"
+  }
+}
