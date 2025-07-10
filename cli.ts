@@ -4,7 +4,6 @@ import { spawn } from "node:child_process";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import { readFileSync } from "node:fs";
 import { pipeline } from "node:stream";
-import { once } from "node:events";
 
 function formatSimple(file: string, item: any): string {
     const severity = item.severity == 1 ? 'error' : item.severity == 2 ? 'warning' : item.severity == 3 ? 'info' : 'hint';
@@ -75,7 +74,6 @@ endpoint.send('initialized', {});
 
 for (const file of process.argv.slice(2)) {
     const uri = pathToFileURL(file).toString();
-    console.log(file);
     const contents = readFileSync(file, 'utf-8');
 
     endpoint.notify("textDocument/didOpen", {
