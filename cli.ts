@@ -46,6 +46,8 @@ await endpoint.send("initialize", {
     rootUri: pathToFileURL(process.cwd()).toString(),
 });
 
+endpoint.send('initialized', {});
+
 for (const file of process.argv.slice(2)) {
     const uri = pathToFileURL(file).toString();
     console.log(file);
@@ -58,12 +60,12 @@ for (const file of process.argv.slice(2)) {
         }
     });
 
-    for (const diags of await once(endpoint, "textDocument/publishDiagnostics")) {
-        console.log(diags.uri);
-        for (const diag of diags.diagnostics) {
-            console.log(diag);
+    const diag = await endpoint.send('textDocument/diagnostic', {
+        textDocument: {
+            uri
         }
-    }
+    });
+    console.log(diag);
 
     endpoint.notify("textDocument/didClose", {
         textDocument: {
