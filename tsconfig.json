@@ -1,16 +1,9 @@
 {
     "compilerOptions": {
-        "rootDir": ".",
         "allowJs": true,
         "strict": true,
-        "module": "Node16",
+        "module": "NodeNext",
         "target": "ES2022",
-        "lib": ["ES2022"],
-        "plugins": [
-            {"name": "typescript-vue-plugin"}
-        ]
-    },
-    "vueCompilerOptions": {
-        "target": 2.7
+        "lib": ["ES2022"]
     }
 }

@@ -9,8 +9,8 @@ import { once } from "node:events";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const server = spawn(
-    resolve(__dirname, 'node_modules/.bin/vue-language-server'),
-    ['--stdio'],
+    resolve(__dirname, 'node_modules/.bin/tsgo'),
+    ['--lsp', '--stdio'],
     {
         stdio: 'pipe'
     }
@@ -31,11 +31,6 @@ await endpoint.send("initialize", {
     capabilities: {
         textDocument: {
             "publishDiagnostics": {}
-        },
-    },
-    initializationOptions: {
-        typescript: {
-            tsdk: resolve(process.cwd(), "node_modules/typescript/lib")
         },
     },
     clientInfo: {
@@ -59,7 +54,7 @@ for (const file of process.argv.slice(2)) {
         textDocument: {
             uri,
             text: readFileSync(file, 'utf-8'),
-            languageId: extname(file) === ".vue" ? "vue" : "typescript"
+            languageId: "typescript"
         }
     });
 
