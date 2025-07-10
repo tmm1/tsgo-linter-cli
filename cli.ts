@@ -1,5 +1,5 @@
 import { JSONRPCEndpoint } from "ts-lsp-client";
-import { dirname, extname, resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import { readFileSync } from "node:fs";
@@ -36,12 +36,12 @@ const server = spawn(
     resolve(__dirname, 'node_modules/.bin/tsgo'),
     ['--lsp', '--stdio'],
     {
-        stdio: 'pipe'
+        stdio: ['pipe', 'pipe', 'ignore'],
     }
 );
 
 server.on("error", console.error);
-pipeline(server.stderr, process.stderr, console.error);
+// pipeline(server.stderr, process.stderr, console.error);
 
 const endpoint = new JSONRPCEndpoint(
     server.stdin,
